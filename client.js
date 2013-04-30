@@ -4,7 +4,7 @@
         var WIDHT = screenCanvas.width;
         var HEIGHT = screenCanvas.height;
 	var screenCanvasContext = screenCanvas.getContext('2d');
-    var framebuffer = new Framebuffer(screenCanvas.width, screenCanvas.height);
+    var framebuffer;
 	var video;
 
 
@@ -30,6 +30,7 @@
    
     function createVideo(src, type) {
     	var video = document.createElement('video');
+    	video.controls = true;
 	    var source = document.createElement('source');
 	    video.appendChild(source);
 	    video.id = 'video';
@@ -46,6 +47,7 @@
 	    body.appendChild(video);
 	    
 	    video.addEventListener('canplay', function () {
+	    	framebuffer = new Framebuffer(video.videoWidth, video.videoHeight);
 	    	video.addEventListener('play', draw);
 	    	video.play();
 	    });
@@ -64,8 +66,8 @@
 
 	function Framebuffer(width, height) {
 		this.canvas = document.createElement("canvas");
-		this.canvas.width = this.width = width;
-	    this.canvas.height = this.height = height;
+		this.canvas.width = this.width = width/4;
+	    this.canvas.height = this.height = height/4;
 	    this.context = this.canvas.getContext("2d");
 	    return this;
 	}
