@@ -34,9 +34,9 @@ wss.on("connection", function(socket) {
 });
 
 function wsSendBinary(socket, data) {
-  var uint8Packet = new Uint8Array(data.length);
-  for(var i = 0, len = data.length; i < len; i++) {
-    uint8Packet[i] = data.readUInt8(i);
+  var uint16Packet = new Uint16Array(data.length/2);
+  for(var i = 0, len = (data.length-1)/2; i < len; i++) {
+    uint16Packet[i] = data.readUInt16LE(i*2);;
   }
-  socket.send(uint8Packet, {binary: true});
+  socket.send(uint16Packet, {binary: true});
 }
