@@ -8,7 +8,7 @@
 	var video;
 
 
-	var socket = new WebSocket("ws://localhost:8080");
+	var socket = new WebSocket("ws://192.168.135.207:8080");
 
 	socket.onmessage = function(event) {
 	  	var reader = new FileReader();
